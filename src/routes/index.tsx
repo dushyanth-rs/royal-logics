@@ -19,6 +19,7 @@ import {
   Youtube,
   MapPinned,
   CalendarClock,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -458,7 +459,8 @@ function Index() {
                 </span>
               </div>
             )}
-            <form className="mt-6 space-y-4" onSubmit={handleSubmit} noValidate>
+            <form className="mt-6" onSubmit={handleSubmit} noValidate>
+              <fieldset disabled={sending} className="m-0 space-y-4 border-0 p-0 disabled:opacity-70">
               <div className="space-y-2">
                 <Label htmlFor="name">
                   Full Name <span className="text-accent">*</span>
@@ -474,7 +476,7 @@ function Index() {
                   onChange={() => setErrors((p) => ({ ...p, name: "" }))}
                 />
                 {errors["name"] && (
-                  <p id="name-error" className="text-sm text-destructive">
+                  <p id="name-error" role="alert" className="text-sm text-destructive">
                     {errors["name"]}
                   </p>
                 )}
@@ -494,14 +496,23 @@ function Index() {
                     placeholder="Enter your phone number"
                     aria-required="true"
                     aria-invalid={!!errors["phone"]}
-                    aria-describedby={errors["phone"] ? "phone-error" : undefined}
+                    aria-describedby={
+                      errors["phone"] ? "phone-error phone-counter" : "phone-counter"
+                    }
                     onChange={(e) => {
                       setPhone(e.target.value.replace(/\D/g, "").slice(0, 10));
                       setErrors((p) => ({ ...p, phone: "" }));
                     }}
                   />
+                  <p
+                    id="phone-counter"
+                    aria-live="polite"
+                    className="text-xs text-muted-foreground"
+                  >
+                    {phone.length}/10 digits
+                  </p>
                   {errors["phone"] && (
-                    <p id="phone-error" className="text-sm text-destructive">
+                    <p id="phone-error" role="alert" className="text-sm text-destructive">
                       {errors["phone"]}
                     </p>
                   )}
@@ -522,7 +533,7 @@ function Index() {
                     onChange={() => setErrors((p) => ({ ...p, email: "" }))}
                   />
                   {errors["email"] && (
-                    <p id="email-error" className="text-sm text-destructive">
+                    <p id="email-error" role="alert" className="text-sm text-destructive">
                       {errors["email"]}
                     </p>
                   )}
@@ -557,7 +568,7 @@ function Index() {
                   </SelectContent>
                 </Select>
                 {errors["problem"] && (
-                  <p id="problem-error" className="text-sm text-destructive">
+                  <p id="problem-error" role="alert" className="text-sm text-destructive">
                     {errors["problem"]}
                   </p>
                 )}
@@ -578,14 +589,33 @@ function Index() {
                   placeholder="Please describe your TV brand, model size, and exactly what happens when you try to turn it on..."
                 />
                 {errors["details"] && (
-                  <p id="details-error" className="text-sm text-destructive">
+                  <p id="details-error" role="alert" className="text-sm text-destructive">
                     {errors["details"]}
                   </p>
                 )}
               </div>
-              <Button type="submit" variant="cta" size="lg" className="w-full" disabled={sending}>
-                {sending ? "Sending..." : "Send Message"}
+              <Button
+                type="submit"
+                variant="cta"
+                size="lg"
+                className="w-full"
+                disabled={sending}
+                aria-busy={sending}
+                aria-describedby={sending ? "form-status" : undefined}
+              >
+                {sending ? (
+                  <>
+                    <Loader2 className="size-5 animate-spin" aria-hidden="true" />
+                    Sending...
+                  </>
+                ) : (
+                  "Send Message"
+                )}
               </Button>
+              <p id="form-status" role="status" aria-live="polite" className="sr-only">
+                {sending ? "Sending your repair request, please wait." : ""}
+              </p>
+              </fieldset>
             </form>
           </div>
           )}
