@@ -12,7 +12,7 @@ export function MapSection() {
         <div className="mt-10 overflow-hidden sm:rounded-xl sm:shadow-card">
           <iframe
             title="Royal Logics shop location on Google Maps"
-            src="https://www.google.com/maps?q=Naresh+Arcade%2C+60+Feet+Main+Road%2C+Prashanth+Nagar%2C+Vijayanagar%2C+Bengaluru%2C+Karnataka+560040&output=embed"
+            src="https://maps.google.com/maps?q=XGGJ%2BFW%20Bengaluru%2C%20Karnataka&t=&z=17&ie=UTF8&iwloc=&output=embed"
             className="h-[320px] w-full border-0 sm:h-[420px]"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
