@@ -211,9 +211,62 @@ const brands = [
   "Panasonic",
 ];
 
+function BookingFormSkeleton() {
+  return (
+    <div className="rounded-xl bg-card p-6 shadow-card sm:p-8" aria-hidden="true">
+      <Skeleton className="h-8 w-56" />
+      <Skeleton className="mt-3 h-4 w-72 max-w-full" />
+      <div className="mt-6 space-y-4">
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-24" />
+          <Skeleton className="h-10 w-full" />
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {[0, 1].map((i) => (
+            <div key={i} className="space-y-2">
+              <Skeleton className="h-4 w-28" />
+              <Skeleton className="h-10 w-full" />
+            </div>
+          ))}
+        </div>
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-32" />
+          <Skeleton className="h-10 w-full" />
+        </div>
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-40" />
+          <Skeleton className="h-24 w-full" />
+        </div>
+        <Skeleton className="h-11 w-full" />
+      </div>
+    </div>
+  );
+}
+
+function ServiceCardSkeleton() {
+  return (
+    <div className="flex flex-col rounded-xl bg-card p-6 shadow-card" aria-hidden="true">
+      <Skeleton className="size-12 rounded-lg" />
+      <Skeleton className="mt-5 h-5 w-40" />
+      <div className="mt-4 space-y-2">
+        <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-3 w-11/12" />
+        <Skeleton className="h-3 w-2/3" />
+      </div>
+      <Skeleton className="mt-5 h-4 w-32" />
+    </div>
+  );
+}
+
 function Index() {
   const [problem, setProblem] = useState("");
   const [sending, setSending] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(t);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
