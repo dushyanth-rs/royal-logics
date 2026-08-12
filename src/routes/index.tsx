@@ -154,24 +154,26 @@ function Index() {
           <a href="#top" className="min-w-0 truncate text-lg font-bold tracking-tight sm:text-xl">
             TV Repair Specialists
           </a>
-          <nav className="hidden items-center gap-8 lg:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-accent"
-              >
-                {link.label}
+          <div className="flex shrink-0 items-center gap-8">
+            <nav className="hidden items-center gap-8 lg:flex">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-accent"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+            <Button variant="cta" size="lg" className="shrink-0" asChild>
+              <a href={`tel:${PHONE.replace(/[^0-9+]/g, "")}`}>
+                <Phone />
+                <span className="hidden sm:inline">Call Now: {PHONE}</span>
+                <span className="sm:hidden">Call Now</span>
               </a>
-            ))}
-          </nav>
-          <Button variant="cta" size="lg" className="shrink-0" asChild>
-            <a href={`tel:${PHONE.replace(/[^0-9+]/g, "")}`}>
-              <Phone />
-              <span className="hidden sm:inline">Call Now: {PHONE}</span>
-              <span className="sm:hidden">Call Now</span>
-            </a>
-          </Button>
+            </Button>
+          </div>
         </div>
       </header>
 
