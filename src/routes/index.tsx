@@ -42,6 +42,7 @@ const ADDRESS =
   "No. 6, 1st Floor, Naresh Arcade, 60 Feet Main Road, Prashanth Nagar, Vijayanagar, Bengaluru, Karnataka - 560040";
 const YOUTUBE = "https://www.youtube.com/@RoyallogicsVijayanagar";
 const WEBHOOK_URL = "https://sheetdb.io/api/v1/8pj3uiazkiso0";
+const SITE_URL = "https://bright-screen-fix.lovable.app";
 
 export const Route = createFileRoute("/")({
   head: () => ({
