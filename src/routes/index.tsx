@@ -283,6 +283,8 @@ function Index() {
   const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [phone, setPhone] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 1500);
@@ -293,6 +295,34 @@ function Index() {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);
+    const name = String(fd.get("name") ?? "").trim();
+    const email = String(fd.get("email") ?? "").trim();
+    const details = String(fd.get("details") ?? "").trim();
+    const phoneDigits = phone.replace(/\D/g, "");
+
+    const nextErrors: Record<string, string> = {};
+    if (!name) nextErrors.name = "Please enter your name.";
+    else if (name.length > 100) nextErrors.name = "Name must be under 100 characters.";
+    if (!phoneDigits) nextErrors.phone = "Please enter your phone number.";
+    else if (phoneDigits.length !== 10)
+      nextErrors.phone = "Phone number must be exactly 10 digits.";
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))
+      nextErrors.email = "Please enter a valid email address.";
+    if (!problem) nextErrors.problem = "Please select your TV type / problem.";
+    if (!details) nextErrors.details = "Please describe the problem.";
+    else if (details.length > 1000)
+      nextErrors.details = "Description must be under 1000 characters.";
+
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) {
+      toast.error("Please fill in all required fields correctly.");
+      const firstKey = Object.keys(nextErrors)[0];
+      const el = form.querySelector<HTMLElement>(`#${firstKey}`);
+      el?.focus();
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
     setSending(true);
     try {
       const res = await fetch(WEBHOOK_URL, {
@@ -300,11 +330,11 @@ function Index() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           data: {
-            Name: String(fd.get("name") ?? ""),
-            Phone: String(fd.get("phone") ?? ""),
-            Email: String(fd.get("email") ?? ""),
+            Name: name,
+            Phone: phoneDigits,
+            Email: email,
             Issue: problem,
-            Message: String(fd.get("details") ?? ""),
+            Message: details,
             Date: new Date().toLocaleString(),
           },
         }),
@@ -313,6 +343,8 @@ function Index() {
       toast.success("Request Received! Royal Logics will contact you shortly");
       form.reset();
       setProblem("");
+      setPhone("");
+      setErrors({});
       setSubmitted(true);
     } catch {
       toast.error("Something went wrong. Please call us at " + PHONE + ".");
