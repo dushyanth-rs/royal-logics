@@ -61,7 +61,67 @@ export const Route = createFileRoute("/")({
           ". Same-day service available.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/" },
+      { property: "og:site_name", content: BUSINESS },
+      { property: "og:locale", content: "en_IN" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: BUSINESS + " | Fast, Reliable TV Repair" },
+      {
+        name: "twitter:description",
+        content:
+          "TV repair specialists in " +
+          CITY +
+          " — cracked screens, no picture, power issues. All brands, on-site service, Pan-India shipping.",
+      },
+      {
+        name: "keywords",
+        content:
+          "TV repair Bengaluru, LED TV repair, LCD TV repair, smart TV repair, TV screen replacement, Royal Logics",
+      },
+      { name: "robots", content: "index, follow" },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL + "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: BUSINESS,
+          description:
+            "TV repair service for all brands and types — cracked screens, no-picture and power problems. On-site across Bengaluru with Pan-India shipping.",
+          url: SITE_URL,
+          telephone: "+91" + PHONE.replace(/\s/g, ""),
+          email: EMAIL,
+          image: SITE_URL + "/apple-touch-icon.png",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress:
+              "No. 6, 1st Floor, Naresh Arcade, 60 Feet Main Road, Prashanth Nagar, Vijayanagar",
+            addressLocality: "Bengaluru",
+            addressRegion: "Karnataka",
+            postalCode: "560040",
+            addressCountry: "IN",
+          },
+          areaServed: [{ "@type": "City", name: "Bengaluru" }, { "@type": "Country", name: "India" }],
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+              ],
+              opens: "10:00",
+              closes: "20:00",
+            },
+          ],
+          sameAs: ["https://www.youtube.com/@RoyallogicsVijayanagar"],
+        }),
+      },
     ],
   }),
   component: Index,
