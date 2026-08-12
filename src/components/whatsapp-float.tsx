@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { WHATSAPP_URL } from "@/lib/contact";
 
 export function WhatsAppFloat() {
@@ -6,6 +7,7 @@ export function WhatsAppFloat() {
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => toast.success("Opening WhatsApp — send your message and we'll reply shortly.")}
       aria-label="Chat with Royal Logics on WhatsApp"
       className="fixed bottom-20 right-4 z-[60] grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105 md:bottom-6 md:right-6"
     >
