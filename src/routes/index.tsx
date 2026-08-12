@@ -301,17 +301,17 @@ function Index() {
     const phoneDigits = phone.replace(/\D/g, "");
 
     const nextErrors: Record<string, string> = {};
-    if (!name) nextErrors.name = "Please enter your name.";
-    else if (name.length > 100) nextErrors.name = "Name must be under 100 characters.";
-    if (!phoneDigits) nextErrors.phone = "Please enter your phone number.";
+    if (!name) nextErrors["name"] = "Please enter your name.";
+    else if (name.length > 100) nextErrors["name"] = "Name must be under 100 characters.";
+    if (!phoneDigits) nextErrors["phone"] = "Please enter your phone number.";
     else if (phoneDigits.length !== 10)
-      nextErrors.phone = "Phone number must be exactly 10 digits.";
+      nextErrors["phone"] = "Phone number must be exactly 10 digits.";
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))
-      nextErrors.email = "Please enter a valid email address.";
-    if (!problem) nextErrors.problem = "Please select your TV type / problem.";
-    if (!details) nextErrors.details = "Please describe the problem.";
+      nextErrors["email"] = "Please enter a valid email address.";
+    if (!problem) nextErrors["problem"] = "Please select your TV type / problem.";
+    if (!details) nextErrors["details"] = "Please describe the problem.";
     else if (details.length > 1000)
-      nextErrors.details = "Description must be under 1000 characters.";
+      nextErrors["details"] = "Description must be under 1000 characters.";
 
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
