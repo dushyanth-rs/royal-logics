@@ -429,12 +429,12 @@ function Index() {
             <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
-                <Input id="name" name="name" placeholder="e.g., Enter your name" required />
+                <Input id="name" name="name" placeholder="Enter your name" required />
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" name="phone" type="tel" placeholder="e.g., Enter your phone number" required />
+                  <Input id="phone" name="phone" type="tel" placeholder="Enter your phone number" required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address</Label>
@@ -442,7 +442,7 @@ function Index() {
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="e.g., Enter your Email-ID"
+                    placeholder="Enter your Email-ID"
                     required
                   />
                 </div>
@@ -468,7 +468,7 @@ function Index() {
                   id="details"
                   name="details"
                   rows={4}
-                  placeholder="e.g., Please describe your TV brand, model size, and exactly what happens when you try to turn it on..."
+                  placeholder="Please describe your TV brand, model size, and exactly what happens when you try to turn it on..."
                 />
               </div>
               <Button type="submit" variant="cta" size="lg" className="w-full" disabled={sending}>
