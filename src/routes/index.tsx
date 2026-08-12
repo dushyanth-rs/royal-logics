@@ -53,32 +53,34 @@ const SITE_URL = "https://bright-screen-fix.lovable.app";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: BUSINESS + " | Same-Day TV Repair in " + CITY },
+      { title: BUSINESS + " | Expert TV Repair in Vijayanagar, Bengaluru" },
       {
         name: "description",
         content:
-          "Expert TV repairs for all major brands. Same-day service, certified technicians and a 90-day warranty. Book your repair online today.",
+          "Fast, reliable TV repair in Bengaluru. Screen replacements, backlight fixes, and smart TV repairs. Visit our Vijayanagar shop or book a home visit today. Call +91 9880787076.",
       },
-      { property: "og:title", content: BUSINESS + " | Fast, Reliable TV Repair" },
+      {
+        property: "og:title",
+        content: BUSINESS + " | Expert TV Repair in Vijayanagar, Bengaluru",
+      },
       {
         property: "og:description",
         content:
-          "Cracked screens, no picture, power problems — we fix all TV brands across " +
-          CITY +
-          ". Same-day service available.",
+          "Screen replacements, backlight fixes and smart TV repairs in Bengaluru. Visit our Vijayanagar shop or book a home visit today.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL + "/" },
       { property: "og:site_name", content: BUSINESS },
       { property: "og:locale", content: "en_IN" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: BUSINESS + " | Fast, Reliable TV Repair" },
+      {
+        name: "twitter:title",
+        content: BUSINESS + " | Expert TV Repair in Vijayanagar, Bengaluru",
+      },
       {
         name: "twitter:description",
         content:
-          "TV repair specialists in " +
-          CITY +
-          " — cracked screens, no picture, power issues. All brands, on-site service, Pan-India shipping.",
+          "Screen replacements, backlight fixes and smart TV repairs in Bengaluru. Visit our Vijayanagar shop or book a home visit today.",
       },
       {
         name: "keywords",
