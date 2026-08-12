@@ -279,6 +279,7 @@ function ServiceCardSkeleton() {
 function Index() {
   const [problem, setProblem] = useState("");
   const [sending, setSending] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -310,6 +311,7 @@ function Index() {
       toast.success("Request Received! Royal Logics will contact you shortly");
       form.reset();
       setProblem("");
+      setSubmitted(true);
     } catch {
       toast.error("Something went wrong. Please call us at " + PHONE + ".");
     } finally {
@@ -351,7 +353,10 @@ function Index() {
               ))}
             </nav>
             <Button variant="cta" size="lg" className="shrink-0" asChild>
-              <a href={`tel:${PHONE_DIGITS}`}>
+              <a
+                href={`tel:${PHONE_DIGITS}`}
+                onClick={() => toast.success(`Calling Royal Logics at ${PHONE}…`)}
+              >
                 <Phone aria-hidden="true" />
                 <span className="hidden sm:inline">Call Now: {PHONE}</span>
                 <span className="sm:hidden">Call Now</span>
@@ -402,6 +407,22 @@ function Index() {
             <p className="mt-2 text-sm text-muted-foreground">
               Tell us what's wrong and we'll call you back within the hour.
             </p>
+            {submitted && (
+              <div
+                role="status"
+                aria-live="polite"
+                className="mt-4 flex items-start gap-3 rounded-lg border border-accent/40 bg-accent/10 p-4 text-sm animate-fade-in"
+              >
+                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-accent text-accent-foreground">
+                  <Check className="size-4" aria-hidden="true" />
+                </span>
+                <span>
+                  <strong className="block font-semibold">Request received!</strong>
+                  Royal Logics will contact you shortly on the number you provided. Need it faster?
+                  Call {PHONE}.
+                </span>
+              </div>
+            )}
             <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
@@ -582,6 +603,7 @@ function Index() {
               </div>
               <a
                 href={`tel:${PHONE_DIGITS}`}
+                onClick={() => toast.success(`Calling Royal Logics at ${PHONE}…`)}
                 className="flex items-center gap-2 transition-colors hover:text-accent"
               >
                 <Phone className="size-4 text-accent" aria-hidden="true" /> {PHONE}
