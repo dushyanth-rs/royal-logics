@@ -303,19 +303,30 @@ function Index() {
     <div id="top" className="min-h-screen bg-background text-foreground">
       <Toaster />
 
+      <a
+        href="#main-content"
+        className="sr-only rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100]"
+      >
+        Skip to main content
+      </a>
+
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
         <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-4 sm:px-6 lg:px-8">
-          <a href="#top" className="min-w-0 truncate text-lg font-bold tracking-tight sm:text-xl">
+          <a
+            href="#top"
+            aria-label={BUSINESS + " home"}
+            className="min-w-0 truncate rounded-md text-lg font-bold tracking-tight sm:text-xl"
+          >
             {BUSINESS}
           </a>
           <div className="flex shrink-0 items-center gap-8">
-            <nav className="hidden items-center gap-8 lg:flex">
+            <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-accent"
+                  className="rounded-md text-sm font-medium text-muted-foreground transition-colors hover:text-accent focus-visible:text-accent"
                 >
                   {link.label}
                 </a>
@@ -323,15 +334,17 @@ function Index() {
             </nav>
             <Button variant="cta" size="lg" className="shrink-0" asChild>
               <a href={`tel:${PHONE.replace(/[^0-9+]/g, "")}`}>
-                <Phone />
+                <Phone aria-hidden="true" />
                 <span className="hidden sm:inline">Call Now: {PHONE}</span>
                 <span className="sm:hidden">Call Now</span>
+                <span className="sr-only">{PHONE}</span>
               </a>
             </Button>
           </div>
         </div>
       </header>
 
+      <main id="main-content">
       {/* Hero */}
       <section id="contact" className="bg-surface">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-start lg:gap-16 lg:px-8 lg:py-24">
