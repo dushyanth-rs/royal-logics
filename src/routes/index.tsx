@@ -352,7 +352,7 @@ function Index() {
             <div className="inline-flex items-center gap-2 rounded-full bg-background px-4 py-2 text-sm font-medium shadow-card">
               <span className="flex items-center gap-0.5 text-accent">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="size-4 fill-current" />
+                  <Star key={i} className="size-4 fill-current" aria-hidden="true" />
                 ))}
               </span>
               <span className="text-muted-foreground">4.9/5 from 200+ happy customers</span>
@@ -368,7 +368,7 @@ function Index() {
               {heroBullets.map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-accent text-accent-foreground">
-                    <Check className="size-4" />
+                    <Check className="size-4" aria-hidden="true" />
                   </span>
                   <span className="font-medium">{item}</span>
                 </li>
@@ -443,7 +443,7 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
           {trustItems.map((item) => (
             <div key={item.label} className="flex items-center gap-3">
-              <item.icon className="size-6 shrink-0 text-accent" />
+              <item.icon className="size-6 shrink-0 text-accent" aria-hidden="true" />
               <span className="min-w-0 font-medium">{item.label}</span>
             </div>
           ))}
@@ -470,7 +470,7 @@ function Index() {
                 className="group flex flex-col rounded-xl bg-card p-6 shadow-card animate-fade-in transition-all hover:-translate-y-1 hover:shadow-lg"
               >
                 <span className="grid size-12 place-items-center rounded-lg bg-accent/10 text-accent">
-                  <service.icon className="size-6" />
+                  <service.icon className="size-6" aria-hidden="true" />
                 </span>
                 <h3 className="mt-5 text-lg font-semibold">{service.title}</h3>
                 <p className="mt-2 flex-1 text-sm text-muted-foreground">{service.description}</p>
@@ -547,13 +547,13 @@ function Index() {
                 Certified TV repair technicians serving {CITY} and surrounding areas.
               </p>
               <p className="mt-4 flex items-start gap-2 text-sm opacity-80">
-                <MapPinned className="mt-0.5 size-4 shrink-0 text-accent" />
+                <MapPinned className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
                 {ADDRESS}
               </p>
             </div>
             <div className="space-y-3 text-sm">
               <div className="flex items-start gap-2 opacity-80">
-                <CalendarClock className="mt-0.5 size-4 shrink-0 text-accent" />
+                <CalendarClock className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
                 <span>
                   Monday to Saturday (10:00 AM – 8:00 PM)
                   <br />
@@ -564,13 +564,13 @@ function Index() {
                 href={`tel:${PHONE.replace(/[^0-9+]/g, "")}`}
                 className="flex items-center gap-2 transition-colors hover:text-accent"
               >
-                <Phone className="size-4 text-accent" /> {PHONE}
+                <Phone className="size-4 text-accent" aria-hidden="true" /> {PHONE}
               </a>
               <a
                 href={`mailto:${EMAIL}`}
                 className="flex items-center gap-2 transition-colors hover:text-accent"
               >
-                <Mail className="size-4 text-accent" /> {EMAIL}
+                <Mail className="size-4 text-accent" aria-hidden="true" /> {EMAIL}
               </a>
               <a
                 href={YOUTUBE}
@@ -578,10 +578,10 @@ function Index() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 transition-colors hover:text-accent"
               >
-                <Youtube className="size-4 text-accent" /> YouTube
+                <Youtube className="size-4 text-accent" aria-hidden="true" /> YouTube
               </a>
               <a href="#top" className="flex items-center gap-2 transition-colors hover:text-accent">
-                <ArrowUp className="size-4 text-accent" /> Back to top
+                <ArrowUp className="size-4 text-accent" aria-hidden="true" /> Back to top
               </a>
             </div>
           </div>
