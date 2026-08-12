@@ -458,31 +458,94 @@ function Index() {
                 </span>
               </div>
             )}
-            <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+            <form className="mt-6 space-y-4" onSubmit={handleSubmit} noValidate>
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input id="name" name="name" placeholder="Enter your name" required />
+                <Label htmlFor="name">
+                  Full Name <span className="text-accent">*</span>
+                </Label>
+                <Input
+                  id="name"
+                  name="name"
+                  placeholder="Enter your name"
+                  maxLength={100}
+                  aria-required="true"
+                  aria-invalid={!!errors["name"]}
+                  aria-describedby={errors["name"] ? "name-error" : undefined}
+                  onChange={() => setErrors((p) => ({ ...p, name: "" }))}
+                />
+                {errors["name"] && (
+                  <p id="name-error" className="text-sm text-destructive">
+                    {errors["name"]}
+                  </p>
+                )}
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" name="phone" type="tel" placeholder="Enter your phone number" required />
+                  <Label htmlFor="phone">
+                    Phone Number <span className="text-accent">*</span>
+                  </Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    inputMode="numeric"
+                    maxLength={10}
+                    value={phone}
+                    placeholder="Enter your phone number"
+                    aria-required="true"
+                    aria-invalid={!!errors["phone"]}
+                    aria-describedby={errors["phone"] ? "phone-error" : undefined}
+                    onChange={(e) => {
+                      setPhone(e.target.value.replace(/\D/g, "").slice(0, 10));
+                      setErrors((p) => ({ ...p, phone: "" }));
+                    }}
+                  />
+                  {errors["phone"] && (
+                    <p id="phone-error" className="text-sm text-destructive">
+                      {errors["phone"]}
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
+                  <Label htmlFor="email">
+                    Email Address{" "}
+                    <span className="text-muted-foreground font-normal">(optional)</span>
+                  </Label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
                     placeholder="Enter your Email-ID"
-                    required
+                    maxLength={255}
+                    aria-invalid={!!errors["email"]}
+                    aria-describedby={errors["email"] ? "email-error" : undefined}
+                    onChange={() => setErrors((p) => ({ ...p, email: "" }))}
                   />
+                  {errors["email"] && (
+                    <p id="email-error" className="text-sm text-destructive">
+                      {errors["email"]}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="problem">TV Type / Problem</Label>
-                <Select value={problem} onValueChange={setProblem}>
-                  <SelectTrigger id="problem" className="w-full">
+                <Label htmlFor="problem">
+                  TV Type / Problem <span className="text-accent">*</span>
+                </Label>
+                <Select
+                  value={problem}
+                  onValueChange={(v) => {
+                    setProblem(v);
+                    setErrors((p) => ({ ...p, problem: "" }));
+                  }}
+                >
+                  <SelectTrigger
+                    id="problem"
+                    className="w-full"
+                    aria-required="true"
+                    aria-invalid={!!errors["problem"]}
+                    aria-describedby={errors["problem"] ? "problem-error" : undefined}
+                  >
                     <SelectValue placeholder="Select an option" />
                   </SelectTrigger>
                   <SelectContent>
@@ -493,15 +556,32 @@ function Index() {
                     <SelectItem value="screen">Screen replacement</SelectItem>
                   </SelectContent>
                 </Select>
+                {errors["problem"] && (
+                  <p id="problem-error" className="text-sm text-destructive">
+                    {errors["problem"]}
+                  </p>
+                )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="details">Describe the Problem</Label>
+                <Label htmlFor="details">
+                  Describe the Problem <span className="text-accent">*</span>
+                </Label>
                 <Textarea
                   id="details"
                   name="details"
                   rows={4}
+                  maxLength={1000}
+                  aria-required="true"
+                  aria-invalid={!!errors["details"]}
+                  aria-describedby={errors["details"] ? "details-error" : undefined}
+                  onChange={() => setErrors((p) => ({ ...p, details: "" }))}
                   placeholder="Please describe your TV brand, model size, and exactly what happens when you try to turn it on..."
                 />
+                {errors["details"] && (
+                  <p id="details-error" className="text-sm text-destructive">
+                    {errors["details"]}
+                  </p>
+                )}
               </div>
               <Button type="submit" variant="cta" size="lg" className="w-full" disabled={sending}>
                 {sending ? "Sending..." : "Send Message"}
