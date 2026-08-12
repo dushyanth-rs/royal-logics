@@ -34,6 +34,10 @@ import {
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { WhatsAppFloat } from "@/components/whatsapp-float";
+import { MobileActionBar } from "@/components/mobile-action-bar";
+import { FaqSection, faqs } from "@/components/faq-section";
+import { MapSection } from "@/components/map-section";
 
 const PHONE = "81239 95301";
 const EMAIL = "Royallogics9269@gmail.com";
@@ -124,6 +128,18 @@ export const Route = createFileRoute("/")({
           sameAs: ["https://www.youtube.com/@RoyallogicsVijayanagar"],
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((item) => ({
+            "@type": "Question",
+            name: item.q,
+            acceptedAnswer: { "@type": "Answer", text: item.a },
+          })),
+        }),
+      },
     ],
   }),
   component: Index,
@@ -133,6 +149,7 @@ const navLinks = [
   { label: "Home", href: "#top" },
   { label: "Services", href: "#services" },
   { label: "How It Works", href: "#how-it-works" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact Us", href: "#contact" },
 ];
 
@@ -536,9 +553,11 @@ function Index() {
       </section>
 
       {/* Footer */}
+      <FaqSection />
+      <MapSection />
       </main>
 
-      <footer className="bg-primary text-primary-foreground">
+      <footer className="bg-primary pb-16 text-primary-foreground md:pb-0">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
             <div className="max-w-sm">
@@ -590,6 +609,9 @@ function Index() {
           </div>
         </div>
       </footer>
+
+      <WhatsAppFloat />
+      <MobileActionBar />
     </div>
   );
 }
