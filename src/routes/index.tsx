@@ -48,6 +48,15 @@ const BUSINESS = "Royal Logics";
 const ADDRESS =
   "No. 6, 1st Floor, Naresh Arcade, 60 Feet Main Road, Prashanth Nagar, Vijayanagar, Bengaluru, Karnataka - 560040";
 const YOUTUBE = "https://www.youtube.com/@RoyallogicsVijayanagar";
+const problemOptions = [
+  { value: "smart-tv-no-internet", label: "Smart TV - No Internet" },
+  { value: "backlight", label: "LED/LCD - Backlight issue" },
+  { value: "power", label: "Power - Won't turn on" },
+  { value: "sound", label: "Sound issues" },
+  { value: "screen", label: "Screen replacement" },
+  { value: "other", label: "Other issues" },
+];
+
 const WEBHOOK_URL = "https://sheetdb.io/api/v1/8pj3uiazkiso0";
 const SITE_URL = "https://bright-screen-fix.lovable.app";
 
@@ -334,7 +343,8 @@ function Index() {
             Name: name,
             Phone: phoneDigits,
             Email: email,
-            Issue: problem,
+            Issue:
+              problemOptions.find((o) => o.value === problem)?.label ?? problem,
             Message: details,
             Date: new Date().toLocaleString(),
           },
@@ -560,11 +570,11 @@ function Index() {
                     <SelectValue placeholder="Select an option" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="smart-tv-no-internet">Smart TV - No Internet</SelectItem>
-                    <SelectItem value="backlight">LED/LCD - Backlight issue</SelectItem>
-                    <SelectItem value="power">Power - Won't turn on</SelectItem>
-                    <SelectItem value="sound">Sound issues</SelectItem>
-                    <SelectItem value="screen">Screen replacement</SelectItem>
+                    {problemOptions.map((o) => (
+                      <SelectItem key={o.value} value={o.value}>
+                        {o.label}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 {errors["problem"] && (
