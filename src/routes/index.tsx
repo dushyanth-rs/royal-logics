@@ -16,6 +16,9 @@ import {
   Phone,
   ArrowUp,
   Mail,
+  Youtube,
+  MapPinned,
+  CalendarClock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,20 +34,25 @@ import {
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 
-const PHONE = "(555) 012-3456";
-const EMAIL = "service@tvrepairspecialists.com";
-const CITY = "Springfield";
+const PHONE = "81239 95301";
+const EMAIL = "Royallogics9269@gmail.com";
+const CITY = "Bengaluru";
+const BUSINESS = "Royal Logics";
+const ADDRESS =
+  "No. 6, 1st Floor, Naresh Arcade, 60 Feet Main Road, Prashanth Nagar, Vijayanagar, Bengaluru, Karnataka - 560040";
+const YOUTUBE = "https://www.youtube.com/@RoyallogicsVijayanagar";
+const WEBHOOK_URL = "https://sheetdb.io/api/v1/8pj3uiazkiso0";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "TV Repair Specialists | Same-Day TV Repair in " + CITY },
+      { title: BUSINESS + " | Same-Day TV Repair in " + CITY },
       {
         name: "description",
         content:
           "Expert TV repairs for all major brands. Same-day service, certified technicians and a 90-day warranty. Book your repair online today.",
       },
-      { property: "og:title", content: "TV Repair Specialists | Fast, Reliable TV Repair" },
+      { property: "og:title", content: BUSINESS + " | Fast, Reliable TV Repair" },
       {
         property: "og:description",
         content:
@@ -77,7 +85,7 @@ const trustItems = [
   { icon: Clock, label: "Same-day service" },
   { icon: ShieldCheck, label: "90-day warranty" },
   { icon: Tv, label: "All major brands" },
-  { icon: MapPin, label: `On-site across ${CITY}` },
+  { icon: MapPin, label: "On-site across Bengaluru & Pan-India shipping" },
 ];
 
 const services = [
@@ -143,6 +151,38 @@ const brands = [
 
 function Index() {
   const [problem, setProblem] = useState("");
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    setSending(true);
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          data: {
+            Name: String(fd.get("name") ?? ""),
+            Phone: String(fd.get("phone") ?? ""),
+            Email: String(fd.get("email") ?? ""),
+            Issue: problem,
+            Message: String(fd.get("details") ?? ""),
+            Date: new Date().toLocaleString(),
+          },
+        }),
+      });
+      if (!res.ok) throw new Error(`Request failed with status ${res.status}`);
+      toast.success("Request Received! Royal Logics will contact you shortly");
+      form.reset();
+      setProblem("");
+    } catch {
+      toast.error("Something went wrong. Please call us at " + PHONE + ".");
+    } finally {
+      setSending(false);
+    }
+  };
 
   return (
     <div id="top" className="min-h-screen bg-background text-foreground">
@@ -152,7 +192,7 @@ function Index() {
       <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
         <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <a href="#top" className="min-w-0 truncate text-lg font-bold tracking-tight sm:text-xl">
-            TV Repair Specialists
+            {BUSINESS}
           </a>
           <div className="flex shrink-0 items-center gap-8">
             <nav className="hidden items-center gap-8 lg:flex">
@@ -193,8 +233,8 @@ function Index() {
               Expert TV Repairs — Fast, Reliable &amp; Affordable
             </h1>
             <p className="mt-5 max-w-xl text-lg text-muted-foreground">
-              From cracked screens to no-picture problems, we fix all TV brands and types across{" "}
-              {CITY}. Same-day service available.
+              From cracked screens to no-picture problems, we fix all TV brands and types. Centrally
+              located in Bengaluru, providing services throughout India.
             </p>
             <ul className="mt-8 space-y-4">
               {heroBullets.map((item) => (
@@ -213,15 +253,7 @@ function Index() {
             <p className="mt-2 text-sm text-muted-foreground">
               Tell us what's wrong and we'll call you back within the hour.
             </p>
-            <form
-              className="mt-6 space-y-4"
-              onSubmit={(e) => {
-                e.preventDefault();
-                toast.success("Thanks! We'll call you back shortly.");
-                (e.target as HTMLFormElement).reset();
-                setProblem("");
-              }}
-            >
+            <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
                 <Input id="name" name="name" placeholder="Jane Doe" required />
@@ -229,7 +261,7 @@ function Index() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" name="phone" type="tel" placeholder="(555) 000-0000" required />
+                  <Input id="phone" name="phone" type="tel" placeholder="81239 95301" required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address</Label>
@@ -266,8 +298,8 @@ function Index() {
                   placeholder="My 55&quot; TV has sound but no picture..."
                 />
               </div>
-              <Button type="submit" variant="cta" size="lg" className="w-full">
-                Send Message
+              <Button type="submit" variant="cta" size="lg" className="w-full" disabled={sending}>
+                {sending ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </div>
@@ -373,13 +405,25 @@ function Index() {
       <footer className="bg-primary text-primary-foreground">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-            <div>
-              <div className="text-lg font-bold">TV Repair Specialists</div>
-              <p className="mt-2 max-w-sm text-sm opacity-80">
+            <div className="max-w-sm">
+              <div className="text-lg font-bold">{BUSINESS}</div>
+              <p className="mt-2 text-sm opacity-80">
                 Certified TV repair technicians serving {CITY} and surrounding areas.
+              </p>
+              <p className="mt-4 flex items-start gap-2 text-sm opacity-80">
+                <MapPinned className="mt-0.5 size-4 shrink-0 text-accent" />
+                {ADDRESS}
               </p>
             </div>
             <div className="space-y-3 text-sm">
+              <div className="flex items-start gap-2 opacity-80">
+                <CalendarClock className="mt-0.5 size-4 shrink-0 text-accent" />
+                <span>
+                  Monday to Saturday (10:00 AM – 8:00 PM)
+                  <br />
+                  Sunday (Closed)
+                </span>
+              </div>
               <a
                 href={`tel:${PHONE.replace(/[^0-9+]/g, "")}`}
                 className="flex items-center gap-2 transition-colors hover:text-accent"
@@ -392,13 +436,21 @@ function Index() {
               >
                 <Mail className="size-4 text-accent" /> {EMAIL}
               </a>
+              <a
+                href={YOUTUBE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 transition-colors hover:text-accent"
+              >
+                <Youtube className="size-4 text-accent" /> YouTube
+              </a>
               <a href="#top" className="flex items-center gap-2 transition-colors hover:text-accent">
                 <ArrowUp className="size-4 text-accent" /> Back to top
               </a>
             </div>
           </div>
           <div className="mt-10 border-t border-primary-foreground/15 pt-6 text-sm opacity-70">
-            © {new Date().getFullYear()} TV Repair Specialists. All rights reserved.
+            © {new Date().getFullYear()} {BUSINESS}. All rights reserved.
           </div>
         </div>
       </footer>
