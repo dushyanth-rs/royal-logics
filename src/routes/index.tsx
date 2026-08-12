@@ -336,9 +336,10 @@ function Index() {
           <a
             href="#top"
             aria-label={BUSINESS + " home"}
-            className="min-w-0 truncate rounded-md text-lg font-bold tracking-tight sm:text-xl"
+            className="min-w-0 truncate rounded-md text-2xl tracking-tight sm:text-3xl"
           >
-            {BUSINESS}
+            <span className="font-extrabold text-primary">Royal</span>
+            <span className="font-light text-accent">Logics</span>
           </a>
           <div className="flex shrink-0 items-center gap-8">
             <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
