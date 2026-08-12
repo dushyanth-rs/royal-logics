@@ -449,8 +449,23 @@ function Index() {
             <BookingFormSkeleton />
           ) : (
           <div className="rounded-xl bg-card p-6 shadow-card animate-fade-in sm:p-8">
-            <h2 className="text-2xl font-bold">Book Your TV Repair</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
+              <Check className="size-3.5" aria-hidden="true" />
+              Free Quote
+            </span>
+            <h2 className="mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">
+              Book Your{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10 bg-[linear-gradient(90deg,var(--accent),var(--accent-hover))] bg-clip-text text-transparent">
+                  TV Repair
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-0.5 left-0 h-[0.28em] w-full rounded-full bg-accent/25"
+                />
+              </span>
+            </h2>
+            <p className="mt-3 text-sm text-muted-foreground">
               Tell us what's wrong and we'll call you back within the hour.
             </p>
             {submitted && (
