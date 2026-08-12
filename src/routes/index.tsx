@@ -39,8 +39,9 @@ import { MobileActionBar } from "@/components/mobile-action-bar";
 import { FaqSection, faqs } from "@/components/faq-section";
 import { MapSection } from "@/components/map-section";
 
-const PHONE = "81239 95301";
-const EMAIL = "Royallogics9269@gmail.com";
+const PHONE = "+91 98807 87076";
+const PHONE_DIGITS = "+919880787076";
+const EMAIL = "royallogics9269@gmail.com";
 const CITY = "Bengaluru";
 const BUSINESS = "Royal Logics";
 const ADDRESS =
@@ -97,7 +98,7 @@ export const Route = createFileRoute("/")({
           description:
             "TV repair service for all brands and types — cracked screens, no-picture and power problems. On-site across Bengaluru with Pan-India shipping.",
           url: SITE_URL,
-          telephone: "+91" + PHONE.replace(/\s/g, ""),
+          telephone: PHONE_DIGITS,
           email: EMAIL,
           image: SITE_URL + "/apple-touch-icon.png",
           address: {
@@ -350,7 +351,7 @@ function Index() {
               ))}
             </nav>
             <Button variant="cta" size="lg" className="shrink-0" asChild>
-              <a href={`tel:${PHONE.replace(/[^0-9+]/g, "")}`}>
+              <a href={`tel:${PHONE_DIGITS}`}>
                 <Phone aria-hidden="true" />
                 <span className="hidden sm:inline">Call Now: {PHONE}</span>
                 <span className="sm:hidden">Call Now</span>
@@ -409,7 +410,7 @@ function Index() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" name="phone" type="tel" placeholder="81239 95301" required />
+                  <Input id="phone" name="phone" type="tel" placeholder="98807 87076" required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address</Label>
@@ -580,7 +581,7 @@ function Index() {
                 </span>
               </div>
               <a
-                href={`tel:${PHONE.replace(/[^0-9+]/g, "")}`}
+                href={`tel:${PHONE_DIGITS}`}
                 className="flex items-center gap-2 transition-colors hover:text-accent"
               >
                 <Phone className="size-4 text-accent" aria-hidden="true" /> {PHONE}
