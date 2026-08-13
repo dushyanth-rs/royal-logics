@@ -787,17 +787,51 @@ function Index() {
               >
                 <Mail className="size-4 text-accent" aria-hidden="true" /> {EMAIL}
               </a>
-              <a
-                href={YOUTUBE}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-accent"
-              >
-                <Youtube className="size-4 text-accent" aria-hidden="true" /> YouTube
-              </a>
               <a href="#top" className="flex items-center gap-2 transition-colors hover:text-accent">
                 <ArrowUp className="size-4 text-accent" aria-hidden="true" /> Back to top
               </a>
+            </div>
+            <div className="text-sm">
+              <h2 className="text-base font-semibold">Follow Us</h2>
+              <p className="mt-2 opacity-80">Updates, repair tips and customer stories.</p>
+              <div className="mt-4 flex flex-wrap gap-4">
+                <a
+                  href="https://www.instagram.com/_royal_logics_/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit our Instagram page"
+                  className="opacity-80 transition-colors hover:text-accent hover:opacity-100"
+                >
+                  <Instagram className="h-6 w-6" aria-hidden="true" />
+                </a>
+                <a
+                  href={YOUTUBE}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit our YouTube channel"
+                  className="opacity-80 transition-colors hover:text-accent hover:opacity-100"
+                >
+                  <Youtube className="h-6 w-6" aria-hidden="true" />
+                </a>
+                <a
+                  href="https://wa.me/919880787076"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Chat with us on WhatsApp"
+                  className="opacity-80 transition-colors hover:text-accent hover:opacity-100"
+                >
+                  <MessageCircle className="h-6 w-6" aria-hidden="true" />
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit our Facebook page"
+                  className="opacity-80 transition-colors hover:text-accent hover:opacity-100"
+                >
+                  <Facebook className="h-6 w-6" aria-hidden="true" />
+                </a>
+              </div>
             </div>
           </div>
           <div className="mt-10 border-t border-primary-foreground/15 pt-6 text-sm opacity-70">
