@@ -832,10 +832,11 @@ function Index() {
                 </a>
                 <a
                   href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit our Facebook page"
-                  className="opacity-80 transition-colors hover:text-accent hover:opacity-100"
+                  onClick={(e) => e.preventDefault()}
+                  aria-label="Facebook page coming soon"
+                  aria-disabled="true"
+                  tabIndex={-1}
+                  className="cursor-default opacity-80 transition-colors hover:text-accent hover:opacity-100"
                 >
                   <Facebook className="h-6 w-6" aria-hidden="true" />
                 </a>
