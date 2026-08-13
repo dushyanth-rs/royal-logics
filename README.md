@@ -2,7 +2,6 @@
 
 A modern, high-converting landing page and lead-capture website for **Royal Logics**, a premier TV repair business based in Vijayanagar, Bengaluru. 
 
-This project was generated using [Lovable](https://lovable.dev/) and is designed to drive local customer bookings through a clean UI and seamless form integration.
 
 ## 🚀 Features
 
