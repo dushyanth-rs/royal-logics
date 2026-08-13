@@ -61,7 +61,8 @@ const problemOptions = [
   { value: "other", label: "Other issues" },
 ];
 
-const WEBHOOK_URL = "https://sheetdb.io/api/v1/8pj3uiazkiso0";
+const WEBHOOK_URL =
+  "https://script.google.com/macros/s/AKfycbwLsIbgx0YZT3KnjmtL5Tg68ktu7zhLuNu31Y5W74O1-kWZww25GMR8puqLzGkHGQnD/exec";
 const SITE_URL = "https://bright-screen-fix.lovable.app";
 
 export const Route = createFileRoute("/")({
@@ -339,23 +340,22 @@ function Index() {
 
     setSending(true);
     try {
+      const payload = new FormData();
+      payload.append("name", name);
+      payload.append("phone", phoneDigits);
+      payload.append("email", email);
+      payload.append(
+        "issue",
+        problemOptions.find((o) => o.value === problem)?.label ?? problem,
+      );
+      payload.append("message", details);
+
       const res = await fetch(WEBHOOK_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          data: {
-            Name: name,
-            Phone: phoneDigits,
-            Email: email,
-            Issue:
-              problemOptions.find((o) => o.value === problem)?.label ?? problem,
-            Message: details,
-            Date: new Date().toLocaleString(),
-          },
-        }),
+        body: payload,
       });
       if (!res.ok) throw new Error(`Request failed with status ${res.status}`);
-      toast.success("Request Received! Royal Logics will contact you shortly");
+      toast.success("Request sent! We will contact you shortly.");
       form.reset();
       setProblem("");
       setPhone("");
