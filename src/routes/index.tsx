@@ -42,6 +42,7 @@ import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { MobileActionBar } from "@/components/mobile-action-bar";
 import { FaqSection, faqs } from "@/components/faq-section";
 import { MapSection } from "@/components/map-section";
+import { WHATSAPP_URL } from "@/lib/contact";
 
 const PHONE = "+91 98807 87076";
 const PHONE_DIGITS = "+919880787076";
@@ -814,7 +815,7 @@ function Index() {
                   <Youtube className="h-6 w-6" aria-hidden="true" />
                 </a>
                 <a
-                  href="https://wa.me/919880787076"
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Chat with us on WhatsApp"
