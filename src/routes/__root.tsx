@@ -89,8 +89,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "preconnect", href: "https://script.google.com", crossOrigin: "anonymous" },
-      { rel: "dns-prefetch", href: "https://script.google.com" },
+      { rel: "preconnect", href: "https://sheetdb.io", crossOrigin: "anonymous" },
+      { rel: "dns-prefetch", href: "https://sheetdb.io" },
       {
         rel: "stylesheet",
         href: appCss,
