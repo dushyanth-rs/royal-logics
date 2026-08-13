@@ -61,8 +61,7 @@ const problemOptions = [
   { value: "other", label: "Other issues" },
 ];
 
-const WEBHOOK_URL =
-  "https://script.google.com/macros/s/AKfycbzPDruKe3lG2mnhTvkI6ZzPEU0q9qz_u-NOjXAkIYrG4dqAqN7rfSyy8nPc9ZorU3zQ/exec";
+const WEBHOOK_URL = "https://sheetdb.io/api/v1/knizwd4eidia9";
 const SITE_URL = "https://bright-screen-fix.lovable.app";
 
 export const Route = createFileRoute("/")({
@@ -340,24 +339,28 @@ function Index() {
 
     setSending(true);
     try {
-      const params = new URLSearchParams();
-      params.append("name", name);
-      params.append("phone", phoneDigits);
-      params.append("email", email);
-      params.append(
-        "issue",
-        problemOptions.find((o) => o.value === problem)?.label ?? problem,
-      );
-      params.append("message", details);
-
-      await fetch(WEBHOOK_URL, {
+      const response = await fetch(WEBHOOK_URL, {
         method: "POST",
-        mode: "no-cors",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-        body: params.toString(),
+        body: JSON.stringify({
+          data: [
+            {
+              Date: new Date().toLocaleString(),
+              Name: name,
+              Phone: phoneDigits,
+              Email: email,
+              Issue:
+                problemOptions.find((o) => o.value === problem)?.label ?? problem,
+              Message: details,
+            },
+          ],
+        }),
       });
+
+      if (!response.ok) throw new Error("Request failed");
 
       toast.success("Message sent successfully!");
       form.reset();
