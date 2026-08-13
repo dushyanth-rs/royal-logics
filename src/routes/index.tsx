@@ -62,7 +62,7 @@ const problemOptions = [
 ];
 
 const WEBHOOK_URL =
-  "https://script.google.com/macros/s/AKfycbwLsIbgx0YZT3KnjmtL5Tg68ktu7zhLuNu31Y5W74O1-kWZww25GMR8puqLzGkHGQnD/exec";
+  "https://script.google.com/macros/s/AKfycbzPDruKe3lG2mnhTvkI6ZzPEU0q9qz_u-NOjXAkIYrG4dqAqN7rfSyy8nPc9ZorU3zQ/exec";
 const SITE_URL = "https://bright-screen-fix.lovable.app";
 
 export const Route = createFileRoute("/")({
@@ -340,23 +340,26 @@ function Index() {
 
     setSending(true);
     try {
-      const payload = new FormData();
-      payload.append("name", name);
-      payload.append("phone", phoneDigits);
-      payload.append("email", email);
-      payload.append(
+      const params = new URLSearchParams();
+      params.append("name", name);
+      params.append("phone", phoneDigits);
+      params.append("email", email);
+      params.append(
         "issue",
         problemOptions.find((o) => o.value === problem)?.label ?? problem,
       );
-      payload.append("message", details);
+      params.append("message", details);
 
       await fetch(WEBHOOK_URL, {
         method: "POST",
         mode: "no-cors",
-        body: payload,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params.toString(),
       });
 
-      toast.success("Request sent! We will contact you shortly.");
+      toast.success("Message sent successfully!");
       form.reset();
       setProblem("");
       setPhone("");
