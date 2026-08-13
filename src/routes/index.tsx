@@ -350,11 +350,12 @@ function Index() {
       );
       payload.append("message", details);
 
-      const res = await fetch(WEBHOOK_URL, {
+      await fetch(WEBHOOK_URL, {
         method: "POST",
+        mode: "no-cors",
         body: payload,
       });
-      if (!res.ok) throw new Error(`Request failed with status ${res.status}`);
+
       toast.success("Request sent! We will contact you shortly.");
       form.reset();
       setProblem("");
