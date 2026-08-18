@@ -62,44 +62,31 @@ const problemOptions = [
 ];
 
 const WEBHOOK_URL = "https://sheetdb.io/api/v1/knizwd4eidia9";
-const SITE_URL = "https://bright-screen-fix.lovable.app";
+const SITE_URL = "https://royallogics.co.in";
+const SEO_TITLE = "LED & Smart TV Repair in Bengaluru | Royal Logics";
+const SEO_DESCRIPTION =
+  "Professional LED and Smart TV repair in Bengaluru. Expert technicians for Sony, LG, Samsung, Mi, Panasonic & Kodak TVs. Fast & reliable service.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: BUSINESS + " | Expert TV Repair in Vijayanagar, Bengaluru" },
-      {
-        name: "description",
-        content:
-          "Fast, reliable TV repair in Bengaluru. Screen replacements, backlight fixes, and smart TV repairs. Visit our Vijayanagar shop or book a home visit today. Call +91 9880787076.",
-      },
-      {
-        property: "og:title",
-        content: BUSINESS + " | Expert TV Repair in Vijayanagar, Bengaluru",
-      },
-      {
-        property: "og:description",
-        content:
-          "Screen replacements, backlight fixes and smart TV repairs in Bengaluru. Visit our Vijayanagar shop or book a home visit today.",
-      },
+      { title: SEO_TITLE },
+      { name: "description", content: SEO_DESCRIPTION },
+      { property: "og:title", content: SEO_TITLE },
+      { property: "og:description", content: SEO_DESCRIPTION },
+      { property: "og:image", content: SITE_URL + "/og-image.jpg" },
+      { name: "twitter:image", content: SITE_URL + "/og-image.jpg" },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL + "/" },
       { property: "og:site_name", content: BUSINESS },
       { property: "og:locale", content: "en_IN" },
       { name: "twitter:card", content: "summary_large_image" },
-      {
-        name: "twitter:title",
-        content: BUSINESS + " | Expert TV Repair in Vijayanagar, Bengaluru",
-      },
-      {
-        name: "twitter:description",
-        content:
-          "Screen replacements, backlight fixes and smart TV repairs in Bengaluru. Visit our Vijayanagar shop or book a home visit today.",
-      },
+      { name: "twitter:title", content: SEO_TITLE },
+      { name: "twitter:description", content: SEO_DESCRIPTION },
       {
         name: "keywords",
         content:
-          "TV repair Bengaluru, LED TV repair, LCD TV repair, smart TV repair, TV screen replacement, Royal Logics",
+          "LED TV repair Bengaluru, Smart TV repair Bengaluru, Sony TV repair, LG TV repair, Samsung TV repair, Mi TV repair, Panasonic TV repair, Kodak TV repair, Royal Logics",
       },
       { name: "robots", content: "index, follow" },
     ],
@@ -238,6 +225,8 @@ const brands = [
   "Samsung",
   "LG",
   "Sony",
+  "Mi",
+  "Kodak",
   "Hisense",
   "TCL",
   "Skyworth",
@@ -438,7 +427,7 @@ function Index() {
               <span className="text-muted-foreground">4.9/5 from 200+ happy customers</span>
             </div>
             <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              Expert TV Repairs — Fast, Reliable &amp; Affordable
+              Expert LED &amp; Smart TV Repair in Bengaluru
             </h1>
             <p className="mt-5 max-w-xl text-lg text-muted-foreground">
               From cracked screens to no-picture problems, we fix all TV brands and types. Centrally
@@ -742,6 +731,10 @@ function Index() {
       <section className="bg-surface">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <h2 className="text-center text-3xl font-bold tracking-tight">Brands We Repair</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
+            We service Sony, LG, Samsung, Mi, Panasonic and Kodak LED &amp; Smart TVs, plus every
+            other major brand.
+          </p>
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {brands.map((brand) => (
               <div
