@@ -225,6 +225,8 @@ const brands = [
   "Samsung",
   "LG",
   "Sony",
+  "Mi",
+  "Kodak",
   "Hisense",
   "TCL",
   "Skyworth",
