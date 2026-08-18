@@ -731,6 +731,10 @@ function Index() {
       <section className="bg-surface">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <h2 className="text-center text-3xl font-bold tracking-tight">Brands We Repair</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
+            We service Sony, LG, Samsung, Mi, Panasonic and Kodak LED &amp; Smart TVs, plus every
+            other major brand.
+          </p>
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {brands.map((brand) => (
               <div
