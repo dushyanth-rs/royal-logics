@@ -427,7 +427,7 @@ function Index() {
               <span className="text-muted-foreground">4.9/5 from 200+ happy customers</span>
             </div>
             <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              Expert TV Repairs — Fast, Reliable &amp; Affordable
+              Expert LED &amp; Smart TV Repair in Bengaluru
             </h1>
             <p className="mt-5 max-w-xl text-lg text-muted-foreground">
               From cracked screens to no-picture problems, we fix all TV brands and types. Centrally
