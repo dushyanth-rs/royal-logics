@@ -96,14 +96,16 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "LocalBusiness",
+          "@graph": [
+            {
+          "@type": "TelevisionRepairService",
           name: BUSINESS,
           description:
             "TV repair service for all brands and types — cracked screens, no-picture and power problems. On-site across Bengaluru with Pan-India shipping.",
-          url: SITE_URL,
+          url: SITE_URL + "/",
           telephone: PHONE_DIGITS,
           email: EMAIL,
-          image: SITE_URL + "/apple-touch-icon.png",
+          image: SITE_URL + "/og-image.jpg",
           address: {
             "@type": "PostalAddress",
             streetAddress:
@@ -113,7 +115,30 @@ export const Route = createFileRoute("/")({
             postalCode: "560040",
             addressCountry: "IN",
           },
-          areaServed: [{ "@type": "City", name: "Bengaluru" }, { "@type": "Country", name: "India" }],
+          geo: { "@type": "GeoCoordinates", latitude: "12.9716", longitude: "77.5946" },
+          areaServed: [
+            { "@type": "City", name: "Bengaluru" },
+            { "@type": "City", name: "Chennai" },
+            { "@type": "City", name: "Hyderabad" },
+            {
+              "@type": "AdministrativeArea",
+              name: "South India (Courier & Mail-in Repair Service)",
+            },
+          ],
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "LED & Smart TV Repair Services",
+            itemListElement: [
+              "LED TV Backlight Replacement & Black Screen Fix",
+              "Motherboard & Chip-Level Circuit Repair",
+              "Power Supply Board & Standby Blinking Red Light Fix",
+              "Display Panel COF Bonding & Line Distortion Repair",
+              "Mail-in & Courier TV Repair for Bengaluru, Chennai & Hyderabad",
+            ].map((name) => ({
+              "@type": "Offer",
+              itemOffered: { "@type": "Service", name },
+            })),
+          },
           openingHoursSpecification: [
             {
               "@type": "OpeningHoursSpecification",
@@ -130,18 +155,16 @@ export const Route = createFileRoute("/")({
             },
           ],
           sameAs: ["https://www.youtube.com/@RoyallogicsVijayanagar"],
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqs.map((item) => ({
-            "@type": "Question",
-            name: item.q,
-            acceptedAnswer: { "@type": "Answer", text: item.a },
-          })),
+            },
+            {
+              "@type": "FAQPage",
+              mainEntity: faqs.map((item) => ({
+                "@type": "Question",
+                name: item.q,
+                acceptedAnswer: { "@type": "Answer", text: item.a },
+              })),
+            },
+          ],
         }),
       },
     ],
